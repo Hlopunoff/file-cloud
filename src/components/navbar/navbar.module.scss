@@ -1,0 +1,12 @@
+.nav {
+    padding: 10px 0;
+    text-align: center;
+    &__logo {
+        text-decoration: none;
+        color: teal;
+        font-size: 24px;
+        line-height: 24px;
+        font-style: normal;
+        font-weight: 700;
+    }
+}

@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux/es/exports";
+import store from "./store";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { MainPage } from "./pages/MainPage";
+import { Layout } from "./components/layout/Layout";
+import { FilePage } from "./pages/FilePage";
 
-export default App;
+export const App = () => {
+    return (
+        <>
+            <Provider store={store}>
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<MainPage />} />
+                        <Route path=":fileId" element={<FilePage/>}/>
+                    </Route>
+                    <Route path="*" element={<h1>Error: Not found</h1>} />
+                </Routes>
+            </Provider>
+        </>
+    );
+};

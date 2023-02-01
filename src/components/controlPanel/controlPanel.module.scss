@@ -1,0 +1,25 @@
+.panel {
+    margin-top: 20px;
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &Input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        &Label {
+            cursor: pointer;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 40px;
+            padding: 0 20px;
+            background-color: teal;
+            border-radius: 25px;
+            color: #fff;
+        }
+    }
+}
