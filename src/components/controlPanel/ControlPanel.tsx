@@ -8,7 +8,7 @@ export const ControlPanel = () => {
 
     const onUploadFile:React.ChangeEventHandler<HTMLInputElement> = (e) => {
         if(e.target.files) {
-            dispatch(uploadFiles(e.target.files));
+            dispatch(uploadFiles({files: e.target.files, purpose: 'upload'}));
         }
     };
 

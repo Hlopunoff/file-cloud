@@ -23,19 +23,18 @@ export const File:FC<Pick<IFile, "id" | "name" | "path">> = ({name, path, id}) =
     };
 
     const onDelete = () => {
-        console.log(id);
-        
         dispatch(deleteFile({ref: ref(storage, path), id}));
     };
 
     useEffect(() => {
+        getDownloadLink();
         getDownloadLink();
     }, []);
 
     return (
         <li className={s['file']} data-file-path={path}>
             <a
-                href={downloadUrl} 
+                href={downloadUrl}
                 target="_blank"
                 rel="noreferrer"
                 download={name}

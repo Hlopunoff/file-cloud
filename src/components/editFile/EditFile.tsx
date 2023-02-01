@@ -35,10 +35,8 @@ export const EditFile:FC<IEditProps> = ({fileId}) => {
         const dt = new DataTransfer();
         dt.items.add(file);
         const fileList = dt.files;
-        console.log(file);
 
-        file.text().then(console.log);
-        dispatch(uploadFiles(fileList));
+        dispatch(uploadFiles({files: fileList, purpose: 'update'}));
         navigate('/');
     };
 
