@@ -17,7 +17,7 @@ export const FileList = () => {
     const loading = isLoading ? <h3>Загрузка...</h3> : null,
           error = isError ? <h3>Ошибка!</h3> : null,
           content = !(loading || error || !files) ? (files as IFile[]).map((file) => {
-            return <File name={file.name} path={file.path} key={file.id} id={file.id}/>
+            return <File name={file.name} path={file.path} key={file.id} id={file.id} link={file.link}/>
     }): null;
 
     return (

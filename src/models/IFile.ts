@@ -3,4 +3,5 @@ export interface IFile {
     path: string;
     id: string;
     content: string;
+    link: string;
 }

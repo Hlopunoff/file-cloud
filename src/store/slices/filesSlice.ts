@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { storage } from '../../firebase';
-import { RootState } from '..';
-import { ref, listAll, uploadBytesResumable, StorageReference, deleteObject } from 'firebase/storage';
+import {  RootState } from '..';
+import { ref, listAll, uploadBytesResumable, StorageReference, deleteObject, getBlob } from 'firebase/storage';
 import {v4 as uuidv4} from 'uuid';
 import { IFile } from '../../models/IFile';
 
@@ -28,10 +28,18 @@ export const getFiles = createAsyncThunk<any, undefined, { rejectValue: string}>
                 return {
                     name: file.name,
                     path: file.fullPath,
-                    id: uuidv4()
+                    id: uuidv4(),
+                    link: ''
                 };
             });
-            return data;
+
+            const dataBlobs = await Promise.all(files.items.map(async file => {
+                return await getBlob(ref(storage, file.fullPath));
+            }));
+            const dataLinks = dataBlobs.map(blob => URL.createObjectURL(blob))
+            
+            
+            return data.map((file, i) => ({...file, link: dataLinks[i]}));
         } catch (error) {
             rejectWithValue((error as Error).message);
         }
@@ -42,12 +50,12 @@ export const uploadFiles = createAsyncThunk<any, {files: FileList, purpose: "upl
     'files/uploadFiles',
     async ({files, purpose}, {rejectWithValue, getState}) => {
         try {
-            const data: Pick<IFile, "id" | 'name' | "path">[] = [];
+            const data: Pick<IFile, "id" | 'name' | "path" | "link">[] = [];
             const sendFile = async (initialFile:File) => {
                 const storageRef = ref(storage, `files/${initialFile.name}`);
                 const uploadTask = uploadBytesResumable(storageRef, initialFile);
 
-                 uploadTask.on('state_changed',
+                uploadTask.on('state_changed',
                     (snapshot) => {
                         switch (snapshot.state) {
                             case 'paused':
@@ -67,7 +75,10 @@ export const uploadFiles = createAsyncThunk<any, {files: FileList, purpose: "upl
                         }
                     }
                 );
-                data.push({ name: initialFile.name, path: `files/${initialFile.name}`, id: uuidv4() });
+                const blob1 = new Blob([initialFile.slice(0, initialFile.size)], {type: 'text/plain'});
+                const href = URL.createObjectURL(blob1);
+                
+                data.push({ name: initialFile.name, path: `files/${initialFile.name}`, id: uuidv4(), link: href });
             };
             Array.from(files).forEach(async (file) => {
                 if (getState().files.files.some(f => f.name === file.name) && purpose === 'upload') {
