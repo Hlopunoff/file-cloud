@@ -1,6 +1,6 @@
 import {FC, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import {ref, getDownloadURL} from 'firebase/storage';
 import { storage } from '../../firebase';
 import { IFile } from '../../models/IFile';

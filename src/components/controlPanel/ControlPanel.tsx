@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { uploadFiles } from '../../store/slices/filesSlice';
 
 import s from './controlPanel.module.scss';

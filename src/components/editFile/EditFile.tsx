@@ -1,7 +1,7 @@
 import { useEffect, FC, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFile, editFile } from "../../store/slices/fileSlice";
-import { useAppDispatch, useAppSelector } from "../../components/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { uploadFiles } from '../../store/slices/filesSlice';
 
 import { Modal } from '../modal/Modal';

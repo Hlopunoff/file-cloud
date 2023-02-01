@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from '../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import {useEffect} from 'react';
 import { IFile } from '../../models/IFile';
 import { getFiles } from '../../store/slices/filesSlice';
