@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { StorageReference, getDownloadURL, ref } from 'firebase/storage';
+import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '../../firebase';
 import { IFile } from '../../models/IFile';
 

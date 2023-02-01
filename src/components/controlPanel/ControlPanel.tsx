@@ -25,7 +25,8 @@ export const ControlPanel = () => {
                     id="upload"
                     onChange={onUploadFile}
                     multiple
-                    accept='text/plain'/>
+                    accept='text/plain'
+                    />
             </div>
         </div>
     );

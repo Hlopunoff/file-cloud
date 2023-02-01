@@ -34,16 +34,18 @@ export const File:FC<Pick<IFile, "id" | "name" | "path">> = ({name, path, id}) =
 
     return (
         <li className={s['file']} data-file-path={path}>
-            <a 
+            <a
                 href={downloadUrl} 
-                className={`${s['file__btn']} ${s['file__btn_download']}`}
-                download={name}>{name}
+                target="_blank"
+                rel="noreferrer"
+                download={name}
+                className={`${s['file__btn']} ${s['file__btn_download']}`}>{name}
             </a>
             <div className={s['file__actions']}>
                 <button 
                     onClick={onDelete}
                     className={`${s['file__btn']} ${s['file__btn_delete']}`}>Удалить</button>
-                <Link to={`/${id}`} className={`${s['file__btn']} ${s['file__btn_edit']}`}>Редактировать</Link>
+                <Link to={`/files/${id}`} className={`${s['file__btn']} ${s['file__btn_edit']}`}>Редактировать</Link>
             </div>
         </li>
     );

@@ -71,7 +71,7 @@ export const EditFile:FC<IEditProps> = ({fileId}) => {
                     className={`${s['edit__btn']} ${s['edit__btn_search']}`}
                     onClick={onOpenModal}>Поиск</button>
                 </div>
-                <p className={s['edit__text']} ref={textRef}>{f && f.content}</p>
+                <p className={s['edit__text']} ref={textRef}>{!(isLoading || isError || !f) ? f.content : null}</p>
             </div>
             <Modal 
             isOpen={isOpen} 
